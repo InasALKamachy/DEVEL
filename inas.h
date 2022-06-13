@@ -1,7 +1,6 @@
 #ifndef INAS_H
 #define INAS_H
 
-#include <QWidget>
 
 class inas
 {
