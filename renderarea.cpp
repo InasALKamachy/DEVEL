@@ -31,12 +31,21 @@ void RenderArea::on_shape_changed(){
     break;
 
     case Cycloid:
+        mScale = 4;
+        mIintervalLength = 6 * M_PI;
+        mStepCount = 128;
         //mBackgroundColor = Qt::blue;
         break;
     case HuygensCycloid:
+        mScale = 4;
+        mIintervalLength = 4 * M_PI;
+        mStepCount = 256;
         //mBackgroundColor = Qt::yellow;
         break;
     case HypoCycloid:
+        mScale = 15;
+        mIintervalLength = 2 * M_PI;
+        mStepCount = 256;
         //mBackgroundColor = Qt::green;
         break;
     case FutureCurve:
@@ -80,20 +89,31 @@ QPointF RenderArea::compute(float t){
 QPointF RenderArea::compute_astroid(float t){
 
     // we will compute the astroid function here
-    float cost_t = cos (t);
+    float cos_t = cos (t);
     float sin_t = sin (t);
-    float x = 2 * cost_t * cost_t * cost_t; //pow(cost_t, 3);
+    float x = 2 * cos_t * cos_t * cos_t; //pow(cost_t, 3);
     float y = 2 * sin_t * sin_t * sin_t;
     return QPointF (x, y);
 
 }
 QPointF RenderArea::compute_Cycloid(float t){
+    return QPointF (
+                1.5 * (1 - cos (t)),  //X
+                1.5 * (t - sin (t))  //Y
+                );
 
 }
 QPointF RenderArea::compute_HuygensCycloid(float t){
-
+  return QPointF (
+              4 * (3 * cos (t) - cos (3 * t)),
+              4 * (3 * sin (t) - sin (3 *t))
+              );
 }
 QPointF RenderArea::compute_HypoCycloid(float t){
+    return QPointF (
+                1.5 * (2 * cos (t) + cos (2 * t)), //X
+                1.5 * (2 * sin (t) - sin (2 * t)) // Y
+                );
 
 }
 QPointF RenderArea::compute_Future_curve(float t){
