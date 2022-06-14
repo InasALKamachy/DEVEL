@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -31,14 +31,7 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="btnAstroid">
-       <property name="text">
-        <string>Astroid</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0" rowspan="6">
+     <item row="0" column="0" rowspan="7">
       <widget class="RenderArea" name="renderArea" native="true">
        <property name="enabled">
         <bool>true</bool>
@@ -52,10 +45,24 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="btnAstroid">
+       <property name="text">
+        <string>Astroid</string>
+       </property>
+      </widget>
+     </item>
      <item row="3" column="1">
       <widget class="QPushButton" name="btnHypo">
        <property name="text">
         <string>HypoCycloid</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="btnLine">
+       <property name="text">
+        <string>Line</string>
        </property>
       </widget>
      </item>
