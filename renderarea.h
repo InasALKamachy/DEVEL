@@ -27,8 +27,9 @@ public:
     float scale () const {return mScale;}
 
     //set Interval Length
-    void setLength(float length){mIintervalLength = length;}
+    void setLength(float length) {mIintervalLength = length; repaint ();}
     float length () const {return mIintervalLength;}
+
   protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 signals:

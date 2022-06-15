@@ -27,9 +27,11 @@ private slots:
     void on_btnLine_clicked();
 
     void on_spinScale_valueChanged(double scale);
-    void on_spinIntervel_valueChanged(double length);
 
 
+
+
+    void on_spinInterval_valueChanged(double arg1);
 
 private:
     void update_ui();

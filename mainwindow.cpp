@@ -19,6 +19,7 @@ void MainWindow::update_ui(){
     this->ui->spinInterval->setValue(this->ui->renderArea->length());
 
 
+
 }
 
 
@@ -68,11 +69,10 @@ void MainWindow::on_spinScale_valueChanged(double scale)
 }
 
 
-void MainWindow::on_spinIntervel_valueChanged(double length)
+
+
+void MainWindow::on_spinInterval_valueChanged(double length)
 {
-    this->ui->renderArea->setLength (length);
+    this->ui->renderArea->setLength(length);
 }
-
-
-
 
