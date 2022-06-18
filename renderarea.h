@@ -14,7 +14,10 @@ public:
     QSize sizeHint() const Q_DECL_OVERRIDE;
 
     enum ShapeType {Astroid, Cycloid, HuygensCycloid, HypoCycloid,Line};
-
+    //Shape Color
+    void ShapeColor (QColor color){mShapeColor = color; } // setter
+    QColor ShapeColor () const {return mShapeColor;} //getter
+    //Background
     void setBackgroundColor (QColor color){mBackgroundColor = color; } // setter
     QColor backgroundColor () const {return mBackgroundColor;} //getter
 
@@ -29,6 +32,10 @@ public:
     //set Interval Length
     void setLength(float length) {mIintervalLength = length; repaint ();}
     float length () const {return mIintervalLength;}
+
+    //set setCount
+    void setCount(int count) {mStepCount = count; repaint ();}
+    float count () const {return mStepCount;}
 
   protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
