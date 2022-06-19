@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QColor>
+#include <QPen>
 
 class RenderArea : public QWidget
 {
@@ -13,10 +14,10 @@ public:
     QSize minimumSizeHint() const Q_DECL_OVERRIDE;
     QSize sizeHint() const Q_DECL_OVERRIDE;
 
-    enum ShapeType {Astroid, Cycloid, HuygensCycloid, HypoCycloid,Line};
+    enum ShapeType {Astroid, Cycloid, HuygensCycloid, HypoCycloid,Cycle,Ellips,Fancy,Starfish,Cloud,Cloud2, Line};
     //Shape Color
-    void ShapeColor (QColor color){mShapeColor = color; } // setter
-    QColor ShapeColor () const {return mShapeColor;} //getter
+    void ShapeColor (QColor color){mPen.setColor(color); } // setter
+    QColor ShapeColor () const {return mPen.color();} //getter
     //Background
     void setBackgroundColor (QColor color){mBackgroundColor = color; } // setter
     QColor backgroundColor () const {return mBackgroundColor;} //getter
@@ -48,14 +49,22 @@ private:
     QPointF compute_Cycloid(float t);
     QPointF compute_HuygensCycloid(float t);
     QPointF compute_HypoCycloid(float t);
+    QPointF compute_Ellips(float t);
+    QPointF compute_Cycle(float t);
+    QPointF compute_Fancy(float t);
+    QPointF compute_Starfish(float t);
     QPointF compute_line(float t);
+    QPointF compute_Cloud(float t);
+    QPointF compute_Cloud2(float t);
+
 private:
     QColor mBackgroundColor;
-    QColor mShapeColor;
+    QPen mPen;
     ShapeType mShape;
     float mIintervalLength;
     float mScale;
     int mStepCount;
+
 
 
 

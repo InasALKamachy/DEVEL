@@ -39,6 +39,19 @@ private slots:
 
     void on_btnLineColor_clicked();
 
+    void on_Cicle_clicked();
+
+
+    void on_btnFancy_clicked();
+
+    void on_btnEllips_clicked();
+
+    void on_btnStarfish_clicked();
+
+    void on_btnCloud_clicked();
+
+    void on_btnCloud2_clicked();
+
 private:
     void update_ui();
 

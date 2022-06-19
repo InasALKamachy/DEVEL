@@ -5,10 +5,11 @@
 RenderArea::RenderArea(QWidget *parent)
     : QWidget{parent},
       mBackgroundColor(0,0,255),
-      mShapeColor(255,255,255),
+      mPen(Qt::white),
       mShape(Astroid)
 
 {
+ mPen.setWidth(2);
  on_shape_changed();
 }
 
@@ -48,10 +49,46 @@ void RenderArea::on_shape_changed(){
         mStepCount = 256;
         //mBackgroundColor = Qt::green;
         break;
+    case Cycle:
+        mScale = 50;
+        mIintervalLength = 2 * M_PI;
+        mStepCount = 128;
+        //mBackgroundColor = Qt::green;
+        break;
+    case Ellips:
+        mScale = 60;
+        mIintervalLength = 2 * M_PI;
+        mStepCount = 256;
+        //mBackgroundColor = Qt::green;
+        break;
+    case Starfish:
+        mScale = 20;
+        mIintervalLength = 6 * M_PI;
+        mStepCount = 256;
+        //mBackgroundColor = Qt::green;
+        break;
+    case Fancy:
+        mScale = 7;
+        mIintervalLength = 12 * M_PI;
+        mStepCount = 512;
+        //mBackgroundColor = Qt::green;
+        break;
+    case Cloud:
+        mScale = 7;
+        mIintervalLength = 28 * M_PI;
+        mStepCount = 128;
+        //mBackgroundColor = Qt::green;
+        break;
+    case Cloud2:
+        mScale = 7;
+        mIintervalLength = 28 * M_PI;
+        mStepCount = 128;
+        //mBackgroundColor = Qt::green;
+        break;
     case Line:
         //TBD
         mScale = 100;
-        mIintervalLength = 1;
+        mIintervalLength = 2;
         mStepCount = 128;
     default:
         break;
@@ -80,6 +117,36 @@ QPointF RenderArea::compute(float t){
         return compute_HypoCycloid(t);
         //mBackgroundColor = Qt::green;
         break;
+    case Ellips:
+        return compute_Ellips(t);
+        //mBackgroundColor = Qt::green;
+        break;
+    case Fancy:
+        return compute_Fancy(t);
+        //mBackgroundColor = Qt::green;
+        break;
+    case Cycle:
+        return compute_Cycle(t);
+        //mBackgroundColor = Qt::green;
+        break;
+    case Starfish:
+
+        //load astroid values
+        return compute_Starfish(t);
+        //mBackgroundColor = Qt::red;
+    break;
+    case Cloud:
+
+        //load astroid values
+        return compute_Cloud(t);
+        //mBackgroundColor = Qt::red;
+    break;
+    case Cloud2:
+
+        //load astroid values
+        return compute_Cloud2(t);
+        //mBackgroundColor = Qt::red;
+    break;
     case Line:
         return compute_line(t);
     default:
@@ -119,9 +186,61 @@ QPointF RenderArea::compute_HypoCycloid(float t){
                 );
 
 }
+//     Point( Center.x + radius*cos( angle ), Center.y + radius*sin( angle ) );
+
+QPointF RenderArea::compute_Cycle(float t){
+
+    return QPointF (sin(t), cos(t));
+
+
+}
+QPointF RenderArea::compute_Ellips(float t){
+    float a=2;
+    float b = 1.1;
+
+    return QPointF (a*sin(t), b*cos(t));
+
+
+}
+QPointF RenderArea::compute_Fancy(float t){
+
+    return QPointF (
+                11.0f*cos(t)-6*cos(11.0f/6*t),
+                11.0f*sin(t)-6*sin(11.0f/6*t));
+}
+
+QPointF RenderArea::compute_Starfish(float t){
+
+   float R = 5,r=3,d=5;
+   float x = (R-r)*cos(t)+d*cos(t*(R-r)/r);
+   float y = (R-r)*sin(t)-d*sin(t*(R-r)/r);
+
+    return QPointF (
+                x,y
+                );
+}
 QPointF RenderArea::compute_line(float t){
 
     return QPointF (1-t, 1-t);
+}
+
+QPointF RenderArea::compute_Cloud(float t){
+    float a = 14;
+    float b = 1;
+    float x = (a+b)*cos(t*b/a)+b*cos(t*(a+b)/a);
+    float y = (a+b)*sin(t*b/a)-b*sin(t*(a+b)/a);
+
+
+    return QPointF (x,y);
+}
+QPointF RenderArea::compute_Cloud2(float t){
+    float a = 14;
+    float b = 1;
+    float x = (a+b)*cos(t*b/a)-b*cos(t*(a+b)/a);
+    float y = (a+b)*sin(t*b/a)-b*sin(t*(a+b)/a);
+
+
+    return QPointF (x,y);
 }
 
 void RenderArea::paintEvent(QPaintEvent *event){
@@ -133,7 +252,7 @@ void RenderArea::paintEvent(QPaintEvent *event){
     // setshape ::
 
     painter.setBrush(mBackgroundColor);
-    painter.setPen(mShapeColor);
+    painter.setPen(mPen);
 
 
 
@@ -162,5 +281,11 @@ void RenderArea::paintEvent(QPaintEvent *event){
         painter.drawLine(pixel, prevPixel);
         prevPixel = pixel;
     }
+    QPointF point = compute (mIintervalLength);//need to define inside renderarea.h
+    QPoint pixel;
+    pixel.setX(point.x() * mScale + center.x());
+    pixel.setY(point.y() * mScale + center.y());
+
+    painter.drawLine(pixel, prevPixel);
 
 }

@@ -96,3 +96,52 @@ void MainWindow::on_btnLineColor_clicked()
     this->ui->renderArea->ShapeColor(color);
 }
 
+
+void MainWindow::on_Cicle_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Cycle);
+    this->ui->renderArea->repaint();
+    update_ui();
+}
+
+
+
+void MainWindow::on_btnFancy_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Fancy);
+    this->ui->renderArea->repaint();
+    update_ui();
+}
+
+
+void MainWindow::on_btnEllips_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Ellips);
+    this->ui->renderArea->repaint();
+    update_ui();
+}
+
+
+void MainWindow::on_btnStarfish_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Starfish);
+    this->ui->renderArea->repaint();
+    update_ui();
+}
+
+
+void MainWindow::on_btnCloud_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Cloud);
+    this->ui->renderArea->repaint();
+    update_ui();
+}
+
+
+void MainWindow::on_btnCloud2_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Cloud2);
+    this->ui->renderArea->repaint();
+    update_ui();
+}
+
